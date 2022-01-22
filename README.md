@@ -89,3 +89,44 @@ easy! Pausing this session of work to go make lunch, and then picking up with:
 ## Step 5: Create Confirmation Mailer
 
 [link](https://stevepolito.design/blog/rails-authentication-from-scratch/#step-5-create-confirmation-mailer)
+
+### Slight deviations/troubleshooting/making things visible
+
+
+I added the mailcatcher gem (https://mailcatcher.me/) to get local emails when the app sends them, tested locally a few times, sure enough, I'm now sending confirmation emails when a user signs up. Clicking the confirmation URL in the email doesn't do anything, but I can tell that it hits the confirmations controller in the logs.
+
+OK, also, I added to the `application.html.erb` the `render flash` default code, so now clicking the email confirmation link says `your account is confirmed`
+
+```diff
+--- a/app/views/layouts/application.html.erb
++++ b/app/views/layouts/application.html.erb
+@@ -11,6 +11,11 @@
+   </head>
+
+   <body>
++    <% flash.each do |type, msg| %>
++      <div>
++        <%= msg %>
++      </div>
++    <% end %>
+     <%= yield %>
+   </body>
+ </html>
+```
+
+And added a link to `sign_up` on the home page:
+
+```diff
+--- a/app/views/static_pages/home.html.erb
++++ b/app/views/static_pages/home.html.erb
+@@ -1,2 +1,4 @@
+ <h1>StaticPages#home</h1>
+ <p>Find me in app/views/static_pages/home.html.erb</p>
++
++<%= link_to "Sign Up", sign_up_path %>
+```
+
+Now, I can "exercise" the whole application, and see it all working at every step. 
+
+I added these two things here: https://github.com/josh-works/rails-authentication-from-scratch/commit/8fe14286c01f3e46f0aaef8c6d1d1bee814cee1f
+
