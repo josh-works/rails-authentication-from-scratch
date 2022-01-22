@@ -130,3 +130,13 @@ Now, I can "exercise" the whole application, and see it all working at every ste
 
 I added these two things here: https://github.com/josh-works/rails-authentication-from-scratch/commit/8fe14286c01f3e46f0aaef8c6d1d1bee814cee1f
 
+## [Step 6: Create Current Model and Authentication Concern](https://stevepolito.design/blog/rails-authentication-from-scratch/#step-6-create-current-model-and-authentication-concern)
+
+Easy! Great explanations. Learning lots of good stuff, like `session fixation` and more.
+
+## Steps 7 & 8
+
+Humming right along. This is a great guide, after every step I stop and make some predictions in my head about how the application has changed, then I validate that.
+
+Clicking around, logging in, clicking various confirmation links in emails, reading flash messages, etc. This guide is great.
+
