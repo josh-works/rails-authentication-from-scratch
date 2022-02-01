@@ -1,0 +1,11 @@
+<%= form_with url: edit_password_path, scope: :user do |form| %>
+  <div class="">
+    <%= form.label "Password:", :password %>
+    <%= form.text_field :password %>
+  </div>
+  <div>
+    <%= form.label "Password Confirmation:", :password_confirmation %>
+    <%= form.text_field :password_confirmation %>
+  </div>
+  <%= form.submit "Save New Password" %>
+<% end %>

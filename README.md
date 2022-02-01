@@ -140,3 +140,9 @@ Humming right along. This is a great guide, after every step I stop and make som
 
 Clicking around, logging in, clicking various confirmation links in emails, reading flash messages, etc. This guide is great.
 
+## [Step 9: Add Password Reset Functionality](https://stevepolito.design/blog/rails-authentication-from-scratch/#step-9-add-password-reset-functionality)
+
+[took a long break, at least a week, between the last entry, doing steps 7 and 8, and starting 9. This is evidence and proof positive for my own detailed note taking. I can jump right in, read a minute, and I'm good to start working.]
+
+oops forgot to commit step 9, I'm actually on step 10
+
