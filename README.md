@@ -153,3 +153,49 @@ I think I was halfway through step 10 when I stopped last time. So much for sett
 Done with step 10 - I was close. This is good refreshing for rails routes, and hooking them up to forms.
 
 ## Step 11
+
+straight forward. 
+
+## Step 12
+
+this is great. learning lots here.
+
+I'm _basically_ done, but now visiting all my routes, testing all the subtle stuff. Adding little links for myself.
+
+When visiting /sign_up, getting:
+```
+Unconfirmed email is invalid
+Unconfirmed email can't be blank
+Unconfirmed email has already been taken
+```
+
+so I've got problems with that unconfirmed email stuff. NBD. 
+
+Other stuff seems to be working well. This has been super educational.
+
+When I come back, I'll visit http://localhost:3000/sign_up, and see why I cannot currently create new users.
+
+From the logs:
+
+```
+Started POST "/sign_up" for 127.0.0.1 at 2022-02-01 23:54:03 -0700
+Processing by UsersController#create as HTML
+  Parameters: {"authenticity_token"=>"[FILTERED]", "user"=>{"email"=>"j@j.j", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]"}, "commit"=>"Sign Up"}
+  TRANSACTION (0.9ms)  BEGIN
+  ↳ app/controllers/users_controller.rb:6:in `create'
+  User Exists? (0.9ms)  SELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2  [["email", "j@j.j"], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:6:in `create'
+  User Exists? (2.3ms)  SELECT 1 AS one FROM "users" WHERE "users"."unconfirmed_email" IS NULL LIMIT $1  [["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:6:in `create'
+  TRANSACTION (1.6ms)  ROLLBACK
+  ↳ app/controllers/users_controller.rb:6:in `create'
+  Rendering layout layouts/application.html.erb
+  Rendering users/new.html.erb within layouts/application
+  Rendered shared/_form_errors.html.erb (Duration: 1.8ms | Allocations: 1439)
+  Rendered users/new.html.erb within layouts/application (Duration: 3.2ms | Allocations: 2319)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered shared/_header.html.erb (Duration: 0.1ms | Allocations: 39)
+  Rendered layout layouts/application.html.erb (Duration: 13.9ms | Allocations: 7077)
+Completed 422 Unprocessable Entity in 318ms (Views: 20.5ms | ActiveRecord: 5.6ms | Allocations: 11602)
+
+```
