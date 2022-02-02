@@ -148,6 +148,8 @@ oops forgot to commit step 9, I'm actually on step 10
 
 ## Step 10
 
-e
-
 I think I was halfway through step 10 when I stopped last time. So much for setting myself up EXACTLY for success. Should have written a note to myself. 
+
+Done with step 10 - I was close. This is good refreshing for rails routes, and hooking them up to forms.
+
+## Step 11
