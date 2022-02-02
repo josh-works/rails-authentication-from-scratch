@@ -1,4 +1,7 @@
+<h3>Please enter the email address we should send the password reset to:</h3>
+
 <%= form_with url: passwords_path, scope: :user do |form| %>
+  <%= form.label "Email:", :email %>
   <%= form.text_field :email %>
   <%= form.submit "Reset Password" %>
 <% end %>

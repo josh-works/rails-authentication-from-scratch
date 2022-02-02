@@ -146,3 +146,8 @@ Clicking around, logging in, clicking various confirmation links in emails, read
 
 oops forgot to commit step 9, I'm actually on step 10
 
+## Step 10
+
+e
+
+I think I was halfway through step 10 when I stopped last time. So much for setting myself up EXACTLY for success. Should have written a note to myself. 

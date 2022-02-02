@@ -20,7 +20,15 @@ class PasswordsController < ApplicationController
     if @user
       if @user.unconfirmed?
         redirect_to new_confirmation_path, alert: "your account seems to be not confirmed, please confirm it"
+      elsif @user.update(password_params)
+        redirect_to login_path, alert: "Your password has been reset. Please sign in"
+      else 
+        flash.now[:alert] = @users.errors.full_messages.to_sentance
+        render :new, status: :unprocessable_entity
       end
+    else
+      flash.now[:alert] = "Invalid or expired token"
+      render :new, status: :unprocessable_entity
     end
   end
   

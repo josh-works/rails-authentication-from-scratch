@@ -1,0 +1,12 @@
+<div>
+  <% if current_user %>
+    <p>Your email address: <%= current_user.email %></p>
+    <p><%= link_to "Log out", logout_path, method: "delete" %></p>
+    <p><%= link_to "Reset Password", new_password_path %></p>
+  <% else %>
+    <ul>
+      <li><%= link_to "Sign Up", sign_up_path %></li>
+      <li><%= link_to "Log In", login_path %></li>
+    </ul>
+  <% end %>
+</div>
