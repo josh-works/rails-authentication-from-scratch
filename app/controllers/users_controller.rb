@@ -1,8 +1,10 @@
 class UsersController < ApplicationController
   before_action :redirect_if_authenticated, only: [:create, :new]
   before_action :authenticate_user!, only: [:edit, :destroy, :update]
+  
   def create
     @user = User.new(create_user_params)
+    require "pry"; binding.pry
     if @user.save
       @user.send_confirmation_email!
       redirect_to root_path, notice: "Welcome #{@user.email}! Please check your email for confirmation instructions"
@@ -30,7 +32,7 @@ class UsersController < ApplicationController
     if @user.authenticate(params[:user][:current_password])
       if @user.update(update_user_params)
         if params[:user][:unconfirmed_email].present?
-          @user.send_confirmation_email
+          @user.send_confirmation_email!
           redirect_to root_path, notice: "Please check your email for confirmation message"
         end
       else

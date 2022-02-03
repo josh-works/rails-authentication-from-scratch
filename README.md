@@ -199,3 +199,64 @@ Processing by UsersController#create as HTML
 Completed 422 Unprocessable Entity in 318ms (Views: 20.5ms | ActiveRecord: 5.6ms | Allocations: 11602)
 
 ```
+
+I had to remove the validation for `unconfirmed_email` on the `user` model. Once I did that, all was groovy. I wonder what I did wrong - I spent a while working on it.
+
+# Step 13
+
+easy
+
+# Step 14
+
+Ran into problems with the migration. 
+
+```ruby
+add_column :users, :remember_token, :string, null: false
+add_index :users, :remember_token, unique: true
+```
+Running it as is, gets me:
+
+```
+PG::NotNullViolation: ERROR:  column "remember_token" contains null values
+```
+
+So, maybe I set the default value to an empty string, but that conflicts w/the uniqueness index:
+
+```ruby
+add_column :users, :remember_token, :string, null: false, default: ""
+add_index :users, :remember_token, unique: true
+```
+
+```
+PG::UniqueViolation: ERROR:  could not create unique index "index_users_on_remember_token"
+DETAIL:  Key (remember_token)=() is duplicated.
+```
+
+So... ended up mixing together the `add_column ` calls, and updating the migration to add data to the column, one at a time, so all the values would be different:
+
+```ruby
+
+class AddRememberTokenToUsers < ActiveRecord::Migration[6.1]
+  def change
+    add_column :users, :remember_token, :string, null: false, default: ""
+    User.find_each do |u|
+      u.update_columns(remember_token: SecureRandom.hex)
+    end
+    add_index :users, :remember_token, unique: true
+  end
+end
+```
+And you can confirm with quick digging in the rails console:
+
+```ruby
+User.all.pluck(:remember_token).sort
+# visually check that it looks unique. It does.
+User.all.pluck(:remember_token).sort.count
+# 114
+User.all.pluck(:remember_token).sort.uniq.count
+# 114, LGTM
+```
+
+Onward.
+
+

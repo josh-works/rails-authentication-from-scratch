@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_02_02_054738) do
+ActiveRecord::Schema.define(version: 2022_02_03_211016) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -22,6 +22,8 @@ ActiveRecord::Schema.define(version: 2022_02_02_054738) do
     t.datetime "confirmed_at"
     t.string "password_digest"
     t.string "unconfirmed_email"
+    t.string "remember_token", default: "", null: false
+    t.index ["remember_token"], name: "index_users_on_remember_token", unique: true
   end
 
 end
