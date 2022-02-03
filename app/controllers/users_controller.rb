@@ -4,7 +4,6 @@ class UsersController < ApplicationController
   
   def create
     @user = User.new(create_user_params)
-    require "pry"; binding.pry
     if @user.save
       @user.send_confirmation_email!
       redirect_to root_path, notice: "Welcome #{@user.email}! Please check your email for confirmation instructions"

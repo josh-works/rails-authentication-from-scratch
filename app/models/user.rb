@@ -3,6 +3,7 @@ class User < ApplicationRecord
   PASSWORD_RESET_TOKEN_EXPIRATION = 10.minutes
   MAILER_FROM_EMAIL = "no-reply@example.com"
   has_secure_password
+  has_secure_token :remember_token
   attr_accessor :current_password
   
   before_save :downcase_email
