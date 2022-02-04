@@ -313,3 +313,20 @@ If I log out, then log back in, and show up on that page (like `/quotes/43`), I'
 Well shit, shoulda timed. I'll commit all this real quick, but I've got it working:
 
 https://share.getcloudapp.com/YEuB4Qm7
+
+Now, lets test out this "remember the page I was on" across logging in and out.
+
+boom. It freaking works. That's neat. 
+
+
+Done with step 17. 
+
+I'm going to skip the timing attack bit. Maybe next time. Reading the wikipedia page and the ruby code is good, though. 
+
+I'm also going to skip step 18, though I also read the links and code, and the threat/defense makes sense to me. 
+
+----------------
+
+Done with the first pass through this tutorial! I learned so much! 
+
+Great work, Steve. 

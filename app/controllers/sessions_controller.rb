@@ -7,11 +7,12 @@ class SessionsController < ApplicationController
     
     if @user
       if @user.unconfirmed?
-        redirect_to new_confirmation_path, alert: "'incorrect' email or password"
+        redirect_to new_confirmation_path, alert: "'incorrect' email or password (you actually need to confirm your email)"
       elsif @user.authenticate(params[:user][:password])
+        after_login_path = session[:user_return_to] || root_path
         login @user
-          remember(@user) if params[:user][:remember_me] == "1"
-          redirect_to root_path, notice: "signed in"
+        remember(@user) if params[:user][:remember_me] == "1"
+        redirect_to after_login_path, notice: "signed in"
       else
         flash.now[:alert] = "Incorrect email or password"
         render :new, status: :unprocessable_entity
