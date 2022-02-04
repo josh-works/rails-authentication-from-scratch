@@ -330,3 +330,9 @@ I'm also going to skip step 18, though I also read the links and code, and the t
 Done with the first pass through this tutorial! I learned so much! 
 
 Great work, Steve. 
+
+OK, I tried deploying to heroku real quick to test, forgot that i'd have to set up mailservers and stuff, so... nvm, I'm gonna create an account, then with the rails console make it a confirmed account and such.
+
+https://rails-auth-tutorial-clone.herokuapp.com/
+
+i'll sort out IRL email later, sometime.
