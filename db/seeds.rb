@@ -8,3 +8,7 @@
 20.times do 
   p User.create(email: Faker::Internet.email, password: "password")
 end
+
+54.times do
+  p Quote.create(quote: Faker::Quote.famous_last_words, author: Faker::Name.name)
+end

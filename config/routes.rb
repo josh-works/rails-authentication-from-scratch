@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :quotes
   root 'static_pages#home'
   post "sign_up", to: "users#create"
   get "sign_up", to: "users#new"

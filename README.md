@@ -295,3 +295,21 @@ index 21b2039..1cfdc4a 100644
 ```
 
 that got me most of the way. I explored some cookie stuff in my browser, clicking around the app, creating it and deleting it, etc. Intresting.
+
+I'd also started having problems with `current_user` in one of my partials. 
+
+I bet that came from messing with the `current_user` method in the `Authentication` module.
+
+## Step 17 (typo w/step 15): Add Friendly Redirects
+
+...
+
+ok, done with step 17. I want to test it, which means I need some data and specific pages.
+
+Lets say we have this "funny quotes" list, and users can visit any funny quote's show page. 
+
+If I log out, then log back in, and show up on that page (like `/quotes/43`), I'll know it worked. Also, an exercise at how quickly I can get this scaffolded up. Should take like 3 minutes, right?
+
+Well shit, shoulda timed. I'll commit all this real quick, but I've got it working:
+
+https://share.getcloudapp.com/YEuB4Qm7
