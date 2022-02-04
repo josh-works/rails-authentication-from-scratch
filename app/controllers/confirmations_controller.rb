@@ -21,6 +21,8 @@ class ConfirmationsController < ApplicationController
       else
         redirect_to new_confirmation_path, alert: "invalid token"
       end
+    else
+      redirect_to new_confirmation_path, alert: "There was an unspecified error"
     end
     
   end

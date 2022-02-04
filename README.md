@@ -154,7 +154,9 @@ Done with step 10 - I was close. This is good refreshing for rails routes, and h
 
 ## Step 11
 
-straight forward. 
+straight forward
+
+(adding this from a few steps later - I've had trouble with the "unconfirmed email" part, as you're about to see...)
 
 ## Step 12
 
@@ -200,7 +202,7 @@ Completed 422 Unprocessable Entity in 318ms (Views: 20.5ms | ActiveRecord: 5.6ms
 
 ```
 
-I had to remove the validation for `unconfirmed_email` on the `user` model. Once I did that, all was groovy. I wonder what I did wrong - I spent a while working on it.
+I commented out the validations on the `unconfirmed_email` column/attribute on the `user` model. That helped. Once I did that, all was groovy. I wonder what I did wrong - I spent a while working on it.
 
 # Step 13
 
@@ -208,7 +210,7 @@ easy
 
 # Step 14
 
-Ran into problems with the migration. 
+Ran into problems with the migration. I've got lots of data in the DB from seeding, making my own users, so it's possible that if I ran all these migrations front to back without data, they'd all work. Or not.
 
 ```ruby
 add_column :users, :remember_token, :string, null: false
@@ -235,7 +237,8 @@ DETAIL:  Key (remember_token)=() is duplicated.
 So... ended up mixing together the `add_column ` calls, and updating the migration to add data to the column, one at a time, so all the values would be different:
 
 ```ruby
-
+# db/timestamp_add_remember_token_to_users.rb
+require 'securerandom'
 class AddRememberTokenToUsers < ActiveRecord::Migration[6.1]
   def change
     add_column :users, :remember_token, :string, null: false, default: ""
@@ -257,6 +260,38 @@ User.all.pluck(:remember_token).sort.uniq.count
 # 114, LGTM
 ```
 
-Onward.
+Looks like it worked. Onward.
 
+I'm done for now, when I come back, updating the Authentication Concern (step 15)
 
+## Step 15
+
+Straightforward, I think. I made the changes, more-or-less followed along. Sure wouldn't be able to do this _without_ the guide, but I'm loving it.
+
+## Step 16
+
+Phew. Sorted out a lot of stuff.
+
+I'd missed adding additional code to the `Authentication` module:
+
+```diff
+diff --git a/app/controllers/concerns/authentication.rb b/app/controllers/concerns/authentication.rb
+index 21b2039..1cfdc4a 100644
+--- a/app/controllers/concerns/authentication.rb
++++ b/app/controllers/concerns/authentication.rb
+@@ -2,9 +2,14 @@ module Authentication
+   extend ActiveSupport::Concern
+
+   included do
++    helper_method :authenticate_user!
++    helper_method :login
+     before_action :current_user
+     helper_method :current_user
+     helper_method :user_signed_in?
++    helper_method :redirect_if_authenticated
++    helper_method :forget
++    helper_method :remember
+   end
+```
+
+that got me most of the way. I explored some cookie stuff in my browser, clicking around the app, creating it and deleting it, etc. Intresting.
