@@ -336,3 +336,94 @@ OK, I tried deploying to heroku real quick to test, forgot that i'd have to set 
 https://rails-auth-tutorial-clone.herokuapp.com/
 
 i'll sort out IRL email later, sometime.
+
+# My own extensions
+
+## 2022-02-04
+
+add Tailwind CSS, check. 
+
+Add this HTML somewhere to prove that it works:
+
+```html
+<form class="w-full max-w-sm">
+  <div class="md:flex md:items-center mb-6">
+    <div class="md:w-1/3">
+      <label class="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4" for="inline-full-name">
+        Full Name
+      </label>
+    </div>
+    <div class="md:w-2/3">
+      <input class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500" id="inline-full-name" type="text" value="Jane Doe">
+    </div>
+  </div>
+  <div class="md:flex md:items-center mb-6">
+    <div class="md:w-1/3">
+      <label class="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4" for="inline-password">
+        Password
+      </label>
+    </div>
+    <div class="md:w-2/3">
+      <input class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500" id="inline-password" type="password" placeholder="******************">
+    </div>
+  </div>
+  <div class="md:flex md:items-center mb-6">
+    <div class="md:w-1/3"></div>
+    <label class="md:w-2/3 block text-gray-500 font-bold">
+      <input class="mr-2 leading-tight" type="checkbox">
+      <span class="text-sm">
+        Send me your newsletter!
+      </span>
+    </label>
+  </div>
+  <div class="md:flex md:items-center">
+    <div class="md:w-1/3"></div>
+    <div class="md:w-2/3">
+      <button class="shadow bg-purple-500 hover:bg-purple-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded" type="button">
+        Sign Up
+      </button>
+    </div>
+  </div>
+</form>
+```
+
+Lets see now if I can style my header a bit, make it look more like a normal thing. Here's what we've got:
+
+![before](/images/header-before.jpg)
+
+Let's tailwind something. 
+
+_rolls up sleeves_
+
+
+![before](/images/tailwind-progress.jpg)
+
+great progress. 
+
+I looked at the basic grids: https://v1.tailwindcss.com/components/flexbox-grids#basic-grids
+
+Then mixed column sizes: https://v1.tailwindcss.com/components/flexbox-grids#mixed-column-sizes
+
+Ended up with:
+
+```HTML+ERB
+<div class="flex mb-4">
+  <div class="w-3/4 bg-sky-500 h-12">
+    <h3><p><%= link_to "See all quotes", quotes_path %></p></h3>
+  </div>
+  <div class="w-1/4 bg-sky-400 h-12">
+      <% if current_user %>
+        <h3><%= current_user.email %></h3>
+        <p><%= link_to "Account", account_path %> </p>
+        <p><%= link_to "Log out", logout_path, method: "delete" %></p>
+        <p><%= link_to "Reset Password", new_password_path %></p>
+      <% else %>
+        <h3>please <%= link_to "Log In", login_path %> or <%= link_to "Sign Up", sign_up_path %></h3>
+      <% end %>
+  </div>
+</div>
+```
+
+Looking good. Lets do some spacing fixes, then look at text stuff, padding, and border radius stuff, but after I try my boulder problem again.
+
+
